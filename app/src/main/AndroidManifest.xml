@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.phoebus.marvelstore">
 
@@ -9,16 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.ComicsListActivity">
+        <activity android:name=".activity.ComicListActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".activity.ShoppingCartActivity"
             android:label="Shopping Cart">
+        </activity>
+
+        <activity
+            android:name=".activity.ComicDetailsActivity">
+            android:label="Comic Details">
         </activity>
 
     </application>

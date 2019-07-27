@@ -12,45 +12,43 @@ import java.util.List;
 import br.com.phoebus.marvelstore.R;
 import br.com.phoebus.marvelstore.model.Comic;
 
-public class ComicsAdapter extends BaseAdapter {
+public class ShoppingCartAdapter extends BaseAdapter {
 
-    private final List<Comic> comicList;
+    private final List<Comic> shoppingCartList;
     private final Context mContext;
 
-    public ComicsAdapter(Context mContext, List<Comic> comicList) {
+    public ShoppingCartAdapter(Context mContext, List<Comic> shoppingCartList) {
         this.mContext = mContext;
-        this.comicList = comicList;
+        this.shoppingCartList = shoppingCartList;
     }
-
     @Override
     public int getCount() {
-        return comicList.size();
+        return shoppingCartList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return comicList.get(i);
+        return shoppingCartList.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return comicList.get(i).getId();
+        return shoppingCartList.get(i).getId();
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View mView = view;
 
         if(mView == null) {
-            mView = inflater.inflate(R.layout.comic_list_item, viewGroup, false);
+            mView = inflater.inflate(R.layout.shopping_cart_list_item, viewGroup, false);
         }
 
-        Comic currComic = comicList.get(i);
+        Comic currComic = shoppingCartList.get(i);
 
-        TextView title = (TextView) mView.findViewById(R.id.title_content);
-        TextView price = (TextView) mView.findViewById(R.id.price_content);
+        TextView title = mView.findViewById(R.id.shopping_cart_list_item_title);
+        TextView price = mView.findViewById(R.id.shopping_cart_list_item_price);
 
         title.setText(currComic.getTitle());
         price.setText(currComic.getPrice());

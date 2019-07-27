@@ -14,21 +14,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.phoebus.marvelstore.R;
-import br.com.phoebus.marvelstore.adapter.ComicsAdapter;
+import br.com.phoebus.marvelstore.adapter.ComicAdapter;
 import br.com.phoebus.marvelstore.model.Comic;
 
-public class ComicsListActivity extends AppCompatActivity {
+public class ComicListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Comics Store");
-        setContentView(R.layout.activity_comics_list);
+        setContentView(R.layout.activity_comic_list);
 
         FloatingActionButton shoppingCartButton = (FloatingActionButton) findViewById(R.id.activity_comics_list_fab_shopping_cart);
         shoppingCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ComicsListActivity.this, ShoppingCartActivity.class);
+                Intent intent = new Intent(ComicListActivity.this, ShoppingCartActivity.class);
                 startActivity(intent);
             }
         });
@@ -43,9 +43,9 @@ public class ComicsListActivity extends AppCompatActivity {
         comicList.add(secComic);
         comicList.add(thirdComic);
 
-        ComicsAdapter mAdapter = new ComicsAdapter(this, comicList);
+        ComicAdapter mAdapter = new ComicAdapter(this, comicList);
 
-        ListView comicsList = findViewById(R.id.activity_comics_list_listview);
+        ListView comicsList = findViewById(R.id.activity_comics_list_list_view);
 
         comicsList.setAdapter(mAdapter);
     }
