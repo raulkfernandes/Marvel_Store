@@ -13,68 +13,69 @@
             android:id="@+id/co"
             android:background="@color/cardview_dark_background"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="200dp"
+            android:layout_margin="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:layout_margin="8dp">
 
             <TextView
                 android:text="Writer:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp" />
+                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp" />
 
             <TextView
                 android:text="Penciler:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp" />
+                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:layout_margin="8dp">
 
             <TextView
                 android:text="Cover Artist:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp" />
+                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp" />
 
             <TextView
                 android:text="Published:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp" />
+                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp" />
         </LinearLayout>
 
         <TextView
             android:text="Price:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"/>
+            android:layout_margin="8dp"/>
 
         <TextView
             android:text="Description:"
             android:background="@color/cardview_shadow_start_color"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_margin="10dp" />
+            android:layout_height="150dp"
+            android:layout_margin="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:layout_margin="8dp">
 
             <Button
                 android:layout_width="48dp"

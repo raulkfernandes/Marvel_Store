@@ -23,7 +23,7 @@ public class ComicDetailsActivity extends AppCompatActivity {
         setTitle("Title: '+ getComicTitle()'");
         setContentView(R.layout.activity_comic_details);
 
-        FloatingActionButton shoppingCartButton = findViewById(R.id.activity_comic_list_fab_shopping_cart);
+        FloatingActionButton shoppingCartButton = findViewById(R.id.activity_comic_details_fab_shopping_cart);
         shoppingCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,5 +66,4 @@ public class ComicDetailsActivity extends AppCompatActivity {
         TextView quantityTextView = findViewById(R.id.activity_comic_details_quantity_text_view);
         quantityTextView.setText("" + quantity);
     }
-
 }

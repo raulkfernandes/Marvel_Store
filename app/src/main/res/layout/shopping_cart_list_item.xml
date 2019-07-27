@@ -41,7 +41,7 @@
 
         <Button
             android:id="@+id/shopping_cart_list_item_remove_button"
-            android:text=" - "
+            android:text=" X "
             android:textSize="10sp"
             android:layout_marginVertical="25dp"
             android:layout_marginHorizontal="5dp"
