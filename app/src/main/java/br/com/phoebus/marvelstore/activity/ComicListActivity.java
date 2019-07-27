@@ -24,7 +24,7 @@ public class ComicListActivity extends AppCompatActivity {
         setTitle("Comics Store");
         setContentView(R.layout.activity_comic_list);
 
-        FloatingActionButton shoppingCartButton = (FloatingActionButton) findViewById(R.id.activity_comics_list_fab_shopping_cart);
+        FloatingActionButton shoppingCartButton = (FloatingActionButton) findViewById(R.id.activity_comic_list_fab_shopping_cart);
         shoppingCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,7 +45,7 @@ public class ComicListActivity extends AppCompatActivity {
 
         ComicAdapter mAdapter = new ComicAdapter(this, comicList);
 
-        ListView comicsList = findViewById(R.id.activity_comics_list_list_view);
+        ListView comicsList = findViewById(R.id.activity_comic_list_list_view);
 
         comicsList.setAdapter(mAdapter);
     }
