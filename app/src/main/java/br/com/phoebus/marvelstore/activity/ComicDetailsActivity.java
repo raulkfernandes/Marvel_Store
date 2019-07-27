@@ -1,6 +1,5 @@
 package br.com.phoebus.marvelstore.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +23,7 @@ public class ComicDetailsActivity extends AppCompatActivity {
         setTitle("Title: '+ getComicTitle()'");
         setContentView(R.layout.activity_comic_details);
 
-        final Comic comic = new Comic("Spiderman", "9,99");
+        final Comic comic = new Comic("Spiderman", "9.99");
 
         Button addToCartButton = findViewById(R.id.activity_comic_store_add_to_cart_button);
         addToCartButton.setOnClickListener(new View.OnClickListener() {
@@ -34,7 +33,7 @@ public class ComicDetailsActivity extends AppCompatActivity {
                     Toast.makeText(ComicDetailsActivity.this, "You must add at least one item to the cart", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    //Toast.makeText(ComicDetailsActivity.this, quantity + " Itens added to cart", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ComicDetailsActivity.this, quantity + " Itens added to cart", Toast.LENGTH_LONG).show();
                     ComicDAO dao = new ComicDAO();
 
                     for(int i = 1; i <= quantity; i++) {

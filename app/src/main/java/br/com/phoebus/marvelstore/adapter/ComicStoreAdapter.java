@@ -34,7 +34,7 @@ public class ComicStoreAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return comicStoreList.get(i).getId();
+        return 0;
     }
 
     @Override

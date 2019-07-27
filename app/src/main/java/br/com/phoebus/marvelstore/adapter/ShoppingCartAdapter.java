@@ -33,7 +33,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return shoppingCartList.get(i).getId();
+        return 0;
     }
 
     @Override
