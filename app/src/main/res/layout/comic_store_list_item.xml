@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/comic_list_item_image"
+        android:id="@+id/comic_store_list_item_image"
         android:background="@color/cardview_dark_background"
         android:layout_width="75dp"
         android:layout_height="75dp" />
@@ -17,7 +17,7 @@
         android:layout_height="75dp">
 
         <TextView
-            android:id="@+id/comic_list_item_title"
+            android:id="@+id/comic_store_list_item_title"
             android:text="X-men"
             android:textSize="20sp"
             android:layout_margin="8dp"
@@ -26,7 +26,7 @@
             android:gravity="center_horizontal" />
 
         <TextView
-            android:id="@+id/comic_list_item_price"
+            android:id="@+id/comic_store_list_item_price"
             android:text="$ 9.99"
             android:textSize="10sp"
             android:layout_margin="8dp"

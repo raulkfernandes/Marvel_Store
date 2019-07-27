@@ -11,8 +11,8 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activity.ComicListActivity"
-            android:label="Comic List">
+            android:name=".activity.ComicStoreActivity"
+            android:label="Comic Store">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

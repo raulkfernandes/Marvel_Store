@@ -12,29 +12,29 @@ import java.util.List;
 import br.com.phoebus.marvelstore.R;
 import br.com.phoebus.marvelstore.model.Comic;
 
-public class ComicAdapter extends BaseAdapter {
+public class ComicStoreAdapter extends BaseAdapter {
 
-    private final List<Comic> comicList;
+    private final List<Comic> comicStoreList;
     private final Context mContext;
 
-    public ComicAdapter(Context mContext, List<Comic> comicList) {
+    public ComicStoreAdapter(Context mContext, List<Comic> comicStoreList) {
         this.mContext = mContext;
-        this.comicList = comicList;
+        this.comicStoreList = comicStoreList;
     }
 
     @Override
     public int getCount() {
-        return comicList.size();
+        return comicStoreList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return comicList.get(i);
+        return comicStoreList.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return comicList.get(i).getId();
+        return comicStoreList.get(i).getId();
     }
 
     @Override
@@ -44,13 +44,13 @@ public class ComicAdapter extends BaseAdapter {
         View mView = view;
 
         if(mView == null) {
-            mView = inflater.inflate(R.layout.comic_list_item, viewGroup, false);
+            mView = inflater.inflate(R.layout.comic_store_list_item, viewGroup, false);
         }
 
-        Comic currComic = comicList.get(i);
+        Comic currComic = comicStoreList.get(i);
 
-        TextView title = mView.findViewById(R.id.comic_list_item_title);
-        TextView price = mView.findViewById(R.id.comic_list_item_price);
+        TextView title = mView.findViewById(R.id.comic_store_list_item_title);
+        TextView price = mView.findViewById(R.id.comic_store_list_item_price);
 
         title.setText(currComic.getTitle());
         price.setText(currComic.getPrice());
