@@ -1,4 +1,4 @@
-package br.com.phoebus.marvelstore;
+package br.com.phoebus.marvelstore.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import br.com.phoebus.marvelstore.model.ShoppingCart;
+import br.com.phoebus.marvelstore.R;
 
 public class ShoppingCartActivity extends AppCompatActivity {
     @Override

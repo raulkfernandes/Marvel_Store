@@ -1,6 +1,5 @@
 package br.com.phoebus.marvelstore.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.phoebus.marvelstore.R;
@@ -36,7 +34,7 @@ public class ComicsAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return comicList.get(i).getId();
     }
 
     @Override
@@ -49,14 +47,13 @@ public class ComicsAdapter extends BaseAdapter {
             mView = inflater.inflate(R.layout.comic_list_item, viewGroup, false);
         }
 
-        Comic curComic = comicList.get(i);
+        Comic currComic = comicList.get(i);
 
         TextView title = (TextView) mView.findViewById(R.id.title_content);
         TextView price = (TextView) mView.findViewById(R.id.price_content);
 
-        title.setText(curComic.getTitle());
-        price.setText(curComic.getPrice());
-
+        title.setText(currComic.getTitle());
+        price.setText(currComic.getPrice());
 
         return mView;
     }

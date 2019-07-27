@@ -1,11 +1,8 @@
-package br.com.phoebus.marvelstore;
+package br.com.phoebus.marvelstore.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -14,24 +11,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import br.com.phoebus.marvelstore.R;
 import br.com.phoebus.marvelstore.adapter.ComicsAdapter;
 import br.com.phoebus.marvelstore.model.Comic;
 
-public class MainActivity extends AppCompatActivity {
+public class ComicsListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Comics Store");
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_comics_list);
 
-        FloatingActionButton shoppingCartButton = (FloatingActionButton) findViewById(R.id.activity_main_fab_shopping_cart);
+        FloatingActionButton shoppingCartButton = (FloatingActionButton) findViewById(R.id.activity_comics_list_fab_shopping_cart);
         shoppingCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ShoppingCartActivity.class);
+                Intent intent = new Intent(ComicsListActivity.this, ShoppingCartActivity.class);
                 startActivity(intent);
             }
         });
@@ -48,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         ComicsAdapter mAdapter = new ComicsAdapter(this, comicList);
 
-        ListView comicsList = findViewById(R.id.activity_main_comics_list);
+        ListView comicsList = findViewById(R.id.activity_comics_list_listview);
 
         comicsList.setAdapter(mAdapter);
     }
