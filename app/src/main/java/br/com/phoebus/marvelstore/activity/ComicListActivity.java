@@ -24,7 +24,7 @@ public class ComicListActivity extends AppCompatActivity {
         setTitle("Comics Store");
         setContentView(R.layout.activity_comic_list);
 
-        FloatingActionButton shoppingCartButton = (FloatingActionButton) findViewById(R.id.activity_comic_list_fab_shopping_cart);
+        FloatingActionButton shoppingCartButton = findViewById(R.id.activity_comic_list_fab_shopping_cart);
         shoppingCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,11 +1,15 @@
 package br.com.phoebus.marvelstore.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import br.com.phoebus.marvelstore.R;
 
@@ -14,9 +18,19 @@ public class ComicDetailsActivity extends AppCompatActivity {
     int quantity = 1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Title: '+ getComicTitle()'");
         setContentView(R.layout.activity_comic_details);
+
+        FloatingActionButton shoppingCartButton = findViewById(R.id.activity_comic_list_fab_shopping_cart);
+        shoppingCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ComicDetailsActivity.this, ShoppingCartActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
