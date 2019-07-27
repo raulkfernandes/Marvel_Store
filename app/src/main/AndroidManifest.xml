@@ -13,11 +13,6 @@
         <activity
             android:name=".activity.ComicStoreActivity"
             android:label="Comic Store">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -28,6 +23,11 @@
         <activity
             android:name=".activity.ComicDetailsActivity"
             android:label="Comic Details">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
     </application>

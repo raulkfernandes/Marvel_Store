@@ -32,6 +32,11 @@ public class ComicStoreActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         List<Comic> comicStoreList = new ArrayList<>();
 
@@ -46,7 +51,6 @@ public class ComicStoreActivity extends AppCompatActivity {
         ComicStoreAdapter mAdapter = new ComicStoreAdapter(this, comicStoreList);
 
         ListView comicsList = findViewById(R.id.activity_comic_store_list_view);
-
         comicsList.setAdapter(mAdapter);
     }
 }

@@ -1,6 +1,7 @@
 package br.com.phoebus.marvelstore.model;
 
 public class Comic {
+
     private long id;
     private String title;
     private String price;
@@ -82,5 +83,10 @@ public class Comic {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return getTitle();
     }
 }
