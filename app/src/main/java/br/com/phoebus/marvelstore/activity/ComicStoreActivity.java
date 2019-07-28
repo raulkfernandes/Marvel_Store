@@ -2,6 +2,7 @@ package br.com.phoebus.marvelstore.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -19,8 +20,18 @@ import br.com.phoebus.marvelstore.R;
 import br.com.phoebus.marvelstore.adapter.ComicStoreAdapter;
 import br.com.phoebus.marvelstore.dao.ComicDAO;
 import br.com.phoebus.marvelstore.model.Comic;
+import br.com.phoebus.marvelstore.retrofit.model.DataJSON;
+import br.com.phoebus.marvelstore.retrofit.model.MarvelAPI;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ComicStoreActivity extends AppCompatActivity {
+
+    private static final String TAG = "ComicStoreActivity";
+    private static final String BASE_URL = "http://gateway.marvel.com/v1/public/";
 
     ComicDAO dao = new ComicDAO();
 
@@ -44,6 +55,7 @@ public class ComicStoreActivity extends AppCompatActivity {
             }
         });
 
+        populateComicsWebService();
         final List<Comic> comicStoreList = populateComicsLocally();
         ComicStoreAdapter mAdapter = new ComicStoreAdapter(this, comicStoreList);
         final ListView comicListView = findViewById(R.id.activity_comic_store_list_view);
@@ -77,6 +89,29 @@ public class ComicStoreActivity extends AppCompatActivity {
 
     private List<Comic> populateComicsWebService() {
         List<Comic> comicList = new ArrayList<>();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        MarvelAPI marvelAPI = retrofit.create(MarvelAPI.class);
+        Call<DataJSON> call = marvelAPI.getData();
+
+        call.enqueue(new Callback<DataJSON>() {
+            @Override
+            public void onResponse(Call<DataJSON> call, Response<DataJSON> response) {
+                Log.d(TAG, "onResponse: Server Response: " + response.toString());
+                Log.d(TAG, "onResponse: Received Information: " + response.body().toString());
+
+                final String data = response.body().getStatus();
+                Log.d(TAG, "onResponse: Data Content: " + data);
+            }
+
+            @Override
+            public void onFailure(Call<DataJSON> call, Throwable t) {
+                Log.d(TAG, "onFailure: Something went wrong: " + t.getMessage());
+            }
+        });
 
         return comicList;
     }

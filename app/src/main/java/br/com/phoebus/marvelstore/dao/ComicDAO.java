@@ -15,9 +15,9 @@ public class ComicDAO {
         ShoppingCartSingleton.getInstante().addComic(comic);
     }
 
-    public void removeFromCart(int index) {
-        ShoppingCartSingleton.getInstante().removeComic(index);
-    }
+//    public void removeFromCart(int index) {
+//        ShoppingCartSingleton.getInstante().removeComic(index);
+//    }
 
     public List<Comic> getCartList() {
         return ShoppingCartSingleton.getInstante().getComicList();
