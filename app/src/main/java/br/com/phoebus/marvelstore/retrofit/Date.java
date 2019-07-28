@@ -3,20 +3,20 @@ package br.com.phoebus.marvelstore.retrofit;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DataJSON {
+public class Date {
 
-    @SerializedName("data")
+    @SerializedName("date")
     @Expose
-    private Data data;
+    private String date;
 
-    public Data getData() {
-        return data;
+    public String getDate() {
+        return date;
     }
 
     @Override
     public String toString() {
-        return "DataJSON{" +
-                ", data=" + data +
+        return "Date{" +
+                "date='" + date + '\'' +
                 '}';
     }
 }

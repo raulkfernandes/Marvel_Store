@@ -20,26 +20,26 @@ public class Comic implements Serializable {
 
     private double price;
 
-    public Comic(String title, String price) {
-        this.title = title;
-        this.price = Double.valueOf(price);
+    public Comic() {
+        this.title = "X-Men 3: Revolition";
+        this.price = 19.9;
         this.publishedDate = "27-12-2019";
         this.writers = "John Lennon, Ringo Star";
         this.pencilers = "Paul";
         this.coverArtists = "George";
+        this.isRare = false;
         this.description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
     }
 
-    // Complete Constructor
     public Comic(String title, String description, String publishedDate, boolean isRare, String writers, String pencilers, String coverArtists, double price) {
-        this.setTitle(title);
-        this.setDescription(description);
-        this.setPublishedDate(publishedDate);
-        this.setRare(isRare);
-        this.setWriters(writers);
-        this.setPencilers(pencilers);
-        this.setCoverArtists(coverArtists);
-        this.setPrice(price);
+        this.title = title;
+        this.price = price;
+        this.publishedDate = publishedDate;
+        this.writers = writers;
+        this.pencilers = pencilers;
+        this.coverArtists = coverArtists;
+        this.isRare = false;
+        this.description = description;
     }
 
     public String getTitle() {

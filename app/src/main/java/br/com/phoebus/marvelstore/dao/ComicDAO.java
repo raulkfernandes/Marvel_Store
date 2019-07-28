@@ -11,6 +11,8 @@ public class ComicDAO {
 
     public static boolean hasCommonDiscountCoupon = false;
     public static boolean hasRareDiscountCoupon = false;
+    public static float commonDiscount = 0.1f;
+    public static float rareDiscount = 0.25f;
 
     public boolean isCartEmpty() {
         return ShoppingCartSingleton.getInstance().isComicListEmpty();
@@ -36,9 +38,6 @@ public class ComicDAO {
         double totalPrice = 0;
         List<Comic> comicList = getCartList();
 
-        Log.i("Coupon Check", "Common Coupon: " + hasCommonDiscountCoupon);
-        Log.i("Coupon Check", "Rare Coupon: " + hasRareDiscountCoupon);
-
         for (int i = 0; i < comicList.size(); i++) {
             totalPrice += comicList.get(i).getPriceDouble();
         }
@@ -46,11 +45,11 @@ public class ComicDAO {
         double discountUpdate = totalPrice;
 
         if(hasCommonDiscountCoupon) {
-            discountUpdate -= discountUpdate * 0.1f;
+            discountUpdate -= discountUpdate * commonDiscount;
             return String.valueOf(discountUpdate);
         }
         else if(hasRareDiscountCoupon) {
-            discountUpdate -= discountUpdate * 0.25f;
+            discountUpdate -= discountUpdate * rareDiscount;
             return String.valueOf(discountUpdate);
         }
         else {

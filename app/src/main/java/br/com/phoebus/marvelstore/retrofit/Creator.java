@@ -5,20 +5,20 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class Data {
+public class Creator {
 
-    @SerializedName("results")
+    @SerializedName("items")
     @Expose
-    private ArrayList<ComicJSON> results;
+    private ArrayList<Item> items;
 
-    public ArrayList<ComicJSON> getComicsJSON() {
-        return results;
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
     @Override
     public String toString() {
-        return "Data{" +
-                "results=" + results +
+        return "Creator{" +
+                "items=" + items +
                 '}';
     }
 }

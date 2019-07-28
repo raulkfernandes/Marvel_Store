@@ -71,7 +71,7 @@ public class ComicDetailsActivity extends AppCompatActivity {
 
         title.setText(comic.getTitle());
         publishedDate.setText(comic.getPublishedDate());
-        price.setText(comic.getPrice());
+        price.setText("$" + comic.getPrice());
         writers.setText(comic.getWriters());
         pencilers.setText(comic.getPencilers());
         coverArtists.setText(comic.getCoverArtists());
