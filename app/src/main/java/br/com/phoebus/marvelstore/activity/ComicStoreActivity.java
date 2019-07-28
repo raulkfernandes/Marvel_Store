@@ -20,8 +20,8 @@ import br.com.phoebus.marvelstore.R;
 import br.com.phoebus.marvelstore.adapter.ComicStoreAdapter;
 import br.com.phoebus.marvelstore.dao.ComicDAO;
 import br.com.phoebus.marvelstore.model.Comic;
-import br.com.phoebus.marvelstore.retrofit.model.DataJSON;
-import br.com.phoebus.marvelstore.retrofit.model.MarvelAPI;
+import br.com.phoebus.marvelstore.retrofit.DataJSON;
+import br.com.phoebus.marvelstore.retrofit.MarvelAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,7 +46,7 @@ public class ComicStoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(dao.getCartList() == null || dao.isCartEmpty()) {
-                    Toast.makeText(ComicStoreActivity.this, "You must add at least one comic to your cart.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ComicStoreActivity.this, "Your cart is empty.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Intent intent = new Intent(ComicStoreActivity.this, ShoppingCartActivity.class);

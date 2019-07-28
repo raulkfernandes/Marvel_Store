@@ -1,4 +1,4 @@
-package br.com.phoebus.marvelstore.retrofit.model;
+package br.com.phoebus.marvelstore.retrofit;
 
 public class Data {
 //

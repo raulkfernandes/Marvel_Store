@@ -1,4 +1,4 @@
-package br.com.phoebus.marvelstore.retrofit.model;
+package br.com.phoebus.marvelstore.retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

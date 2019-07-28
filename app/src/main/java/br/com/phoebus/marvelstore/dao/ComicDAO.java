@@ -1,5 +1,7 @@
 package br.com.phoebus.marvelstore.dao;
 
+import android.util.Log;
+
 import java.util.List;
 
 import br.com.phoebus.marvelstore.model.Comic;
@@ -7,33 +9,71 @@ import br.com.phoebus.marvelstore.model.ShoppingCartSingleton;
 
 public class ComicDAO {
 
+    public static boolean hasCommonDiscountCoupon = false;
+    public static boolean hasRareDiscountCoupon = false;
+
     public boolean isCartEmpty() {
-        return ShoppingCartSingleton.getInstante().isComicListEmpty();
+        return ShoppingCartSingleton.getInstance().isComicListEmpty();
     }
 
     public void addToCart(Comic comic) {
-        ShoppingCartSingleton.getInstante().addComic(comic);
+        ShoppingCartSingleton.getInstance().addComic(comic);
     }
 
-//    public void removeFromCart(int index) {
-//        ShoppingCartSingleton.getInstante().removeComic(index);
-//    }
+    public void removeFromCart(int index) {
+        ShoppingCartSingleton.getInstance().removeComic(index);
+    }
 
     public List<Comic> getCartList() {
-        return ShoppingCartSingleton.getInstante().getComicList();
+        return ShoppingCartSingleton.getInstance().getComicList();
     }
 
     public void clearCarList() {
-        ShoppingCartSingleton.getInstante().clearComicList();
+        ShoppingCartSingleton.getInstance().clearComicList();
     }
 
     public String getTotalPrice() {
         double totalPrice = 0;
         List<Comic> comicList = getCartList();
 
-        for(int i = 0; i < comicList.size(); i++) {
+        Log.i("Coupon Check", "Common Coupon: " + hasCommonDiscountCoupon);
+        Log.i("Coupon Check", "Rare Coupon: " + hasRareDiscountCoupon);
+
+        for (int i = 0; i < comicList.size(); i++) {
             totalPrice += comicList.get(i).getPriceDouble();
         }
-        return String.valueOf(totalPrice);
+
+        double discountUpdate = totalPrice;
+
+        if(hasCommonDiscountCoupon) {
+            discountUpdate -= discountUpdate * 0.1f;
+            return String.valueOf(discountUpdate);
+        }
+        else if(hasRareDiscountCoupon) {
+            discountUpdate -= discountUpdate * 0.25f;
+            return String.valueOf(discountUpdate);
+        }
+        else {
+            return String.valueOf(totalPrice);
+        }
+    }
+
+    public void setDiscountCoupon(String discountCouponCheck) {
+        if(discountCouponCheck == "common") {
+            hasCommonDiscountCoupon = true;
+            hasRareDiscountCoupon = false;
+        } else if (discountCouponCheck == "rare") {
+            hasCommonDiscountCoupon = false;
+            hasRareDiscountCoupon = true;
+        }
+    }
+
+    public void resetDiscountCoupon() {
+        hasCommonDiscountCoupon = false;
+        hasRareDiscountCoupon = false;
+    }
+
+    public boolean hasDiscountCouponApplied() {
+        return hasCommonDiscountCoupon || hasRareDiscountCoupon;
     }
 }

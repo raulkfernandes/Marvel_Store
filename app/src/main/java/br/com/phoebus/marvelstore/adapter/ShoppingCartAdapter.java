@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import br.com.phoebus.marvelstore.R;
@@ -63,12 +64,23 @@ public class ShoppingCartAdapter extends BaseAdapter {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "Comic removed", Toast.LENGTH_SHORT).show();
-                shoppingCartList.remove(index);
-                mAdapter.notifyDataSetChanged();
+                dao.removeFromCart(index);
 
-                final TextView totalPrice = ((Activity) mContext).getWindow().getDecorView().findViewById(R.id.activity_shopping_cart_total_price_text_view);
-                totalPrice.setText(dao.getTotalPrice());
+                if (dao.isCartEmpty()) {
+                    Toast.makeText(mContext, "Your cart is empty.", Toast.LENGTH_SHORT).show();
+                    ((Activity) mContext).finish();
+                }
+                else {
+                    Toast.makeText(mContext, "Comic removed.", Toast.LENGTH_SHORT).show();
+                }
+
+                TextView totalPrice = ((Activity) mContext).findViewById(R.id.activity_shopping_cart_total_price_text_view);
+
+                final DecimalFormat df = new DecimalFormat("#0.00");
+                final double doublePrice = Double.valueOf(dao.getTotalPrice());
+                totalPrice.setText(df.format(doublePrice));
+
+                mAdapter.notifyDataSetChanged();
             }
         });
 

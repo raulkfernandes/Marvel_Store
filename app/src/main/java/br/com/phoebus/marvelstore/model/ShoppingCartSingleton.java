@@ -13,7 +13,7 @@ public class ShoppingCartSingleton {
 
     private ShoppingCartSingleton() {}
 
-    public static ShoppingCartSingleton getInstante() {
+    public static ShoppingCartSingleton getInstance() {
         if(instance == null) {
             instance = new ShoppingCartSingleton();
         }
