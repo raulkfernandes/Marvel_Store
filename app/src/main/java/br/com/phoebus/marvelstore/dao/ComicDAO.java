@@ -26,4 +26,14 @@ public class ComicDAO {
     public void clearCarList() {
         ShoppingCartSingleton.getInstante().clearComicList();
     }
+
+    public String getTotalPrice() {
+        double totalPrice = 0;
+        List<Comic> comicList = getCartList();
+
+        for(int i = 0; i < comicList.size(); i++) {
+            totalPrice += comicList.get(i).getPriceDouble();
+        }
+        return String.valueOf(totalPrice);
+    }
 }

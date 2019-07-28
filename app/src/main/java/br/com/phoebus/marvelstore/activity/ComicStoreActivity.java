@@ -35,7 +35,7 @@ public class ComicStoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(dao.getCartList() == null || dao.isCartEmpty()) {
-                    Toast.makeText(ComicStoreActivity.this, "You must add at leat one comic to your cart.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ComicStoreActivity.this, "You must add at least one comic to your cart.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Intent intent = new Intent(ComicStoreActivity.this, ShoppingCartActivity.class);
@@ -44,7 +44,7 @@ public class ComicStoreActivity extends AppCompatActivity {
             }
         });
 
-        final List<Comic> comicStoreList = populateComics();
+        final List<Comic> comicStoreList = populateComicsLocally();
         ComicStoreAdapter mAdapter = new ComicStoreAdapter(this, comicStoreList);
         final ListView comicListView = findViewById(R.id.activity_comic_store_list_view);
         comicListView.setAdapter(mAdapter);
@@ -61,7 +61,7 @@ public class ComicStoreActivity extends AppCompatActivity {
         });
     }
 
-    private List<Comic> populateComics() {
+    private List<Comic> populateComicsLocally() {
         List<Comic> comicList = new ArrayList<>();
 
         Comic firstComic = new Comic("X-Men", "9.99");
@@ -71,6 +71,12 @@ public class ComicStoreActivity extends AppCompatActivity {
         comicList.add(firstComic);
         comicList.add(secComic);
         comicList.add(thirdComic);
+
+        return comicList;
+    }
+
+    private List<Comic> populateComicsWebService() {
+        List<Comic> comicList = new ArrayList<>();
 
         return comicList;
     }

@@ -1,25 +1,31 @@
 package br.com.phoebus.marvelstore.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import br.com.phoebus.marvelstore.R;
+import br.com.phoebus.marvelstore.dao.ComicDAO;
 import br.com.phoebus.marvelstore.model.Comic;
 
 public class ShoppingCartAdapter extends BaseAdapter {
 
     private final List<Comic> shoppingCartList;
     private final Context mContext;
+    private final ComicDAO dao;
 
-    public ShoppingCartAdapter(Context mContext, List<Comic> shoppingCartList) {
+    public ShoppingCartAdapter(Context mContext, ComicDAO dao) {
         this.mContext = mContext;
-        this.shoppingCartList = shoppingCartList;
+        this.shoppingCartList = dao.getCartList();
+        this.dao = dao;
     }
     @Override
     public int getCount() {
@@ -40,18 +46,31 @@ public class ShoppingCartAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View mView = view;
+        final int index = i;
+        final ShoppingCartAdapter mAdapter = this;
 
         if(mView == null) {
             mView = inflater.inflate(R.layout.shopping_cart_list_item, viewGroup, false);
         }
-
         Comic currComic = shoppingCartList.get(i);
 
         TextView title = mView.findViewById(R.id.shopping_cart_list_item_title);
         TextView price = mView.findViewById(R.id.shopping_cart_list_item_price);
+        Button removeButton = mView.findViewById(R.id.shopping_cart_list_item_remove_button);
 
         title.setText(currComic.getTitle());
         price.setText(currComic.getPrice());
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "Comic removed", Toast.LENGTH_SHORT).show();
+                shoppingCartList.remove(index);
+                mAdapter.notifyDataSetChanged();
+
+                final TextView totalPrice = ((Activity) mContext).getWindow().getDecorView().findViewById(R.id.activity_shopping_cart_total_price_text_view);
+                totalPrice.setText(dao.getTotalPrice());
+            }
+        });
 
         return mView;
     }
