@@ -17,12 +17,15 @@ public class ShoppingCartSingleton {
         if(instance == null) {
             instance = new ShoppingCartSingleton();
         }
-
         return instance;
     }
 
-    public boolean isEmpty() {
-        return shoppingCartList.isEmpty();
+    public boolean isComicListEmpty() {
+        boolean isEmpty = false;
+        if(shoppingCartList != null) {
+            isEmpty = shoppingCartList.isEmpty();
+        }
+        return isEmpty;
     }
 
     public void addComic(Comic comic) {
@@ -33,15 +36,18 @@ public class ShoppingCartSingleton {
     }
 
     public List<Comic> getComicList() {
-        if(shoppingCartList == null) {
-            shoppingCartList = new ArrayList();
-        }
         return shoppingCartList;
     }
 
     public void removeComic(int index) {
         if(shoppingCartList != null) {
             shoppingCartList.remove(index);
+        }
+    }
+
+    public void clearComicList() {
+        if(shoppingCartList != null) {
+            shoppingCartList.clear();
         }
     }
 }

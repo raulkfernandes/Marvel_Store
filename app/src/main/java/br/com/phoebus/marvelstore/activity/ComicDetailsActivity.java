@@ -1,6 +1,8 @@
 package br.com.phoebus.marvelstore.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,48 +17,77 @@ import br.com.phoebus.marvelstore.model.Comic;
 
 public class ComicDetailsActivity extends AppCompatActivity {
 
-    int quantity = 0;
+    private int quantity = 0;
+    private ComicDAO dao = new ComicDAO();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Title: '+ getComicTitle()'");
+        setTitle("Comic Details");
         setContentView(R.layout.activity_comic_details);
 
-        final Comic comic = new Comic("Spiderman", "9.99");
+        Button incrementButton = findViewById(R.id.activity_comic_details_increment_button);
+        Button decrementButton = findViewById(R.id.activity_comic_details_decrement_button);
+
+        incrementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                increment();
+            }
+        });
+
+        decrementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                decrement();
+            }
+        });
+
+        Intent comicIntent = getIntent();
+        final Comic comic = (Comic) comicIntent.getSerializableExtra("selectedComic");
+
+        populateComicDetailsUI(comic);
 
         Button addToCartButton = findViewById(R.id.activity_comic_store_add_to_cart_button);
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(quantity == 0) {
-                    Toast.makeText(ComicDetailsActivity.this, "You must add at least one item to the cart", Toast.LENGTH_SHORT).show();
+            if(quantity == 0) {
+                Toast.makeText(ComicDetailsActivity.this, "You must add at least one item to the cart", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(ComicDetailsActivity.this, quantity + " Itens added to cart", Toast.LENGTH_LONG).show();
+                for(int i = 1; i <= quantity; i++) {
+                    dao.addToCart(comic);
                 }
-                else {
-                    Toast.makeText(ComicDetailsActivity.this, quantity + " Itens added to cart", Toast.LENGTH_LONG).show();
-                    ComicDAO dao = new ComicDAO();
-
-                    for(int i = 1; i <= quantity; i++) {
-                        dao.addToCart(comic);
-                    }
-
-                    Toast.makeText(ComicDetailsActivity.this, dao.getCartList().toString(), Toast.LENGTH_LONG).show();
-                    finish();
-                }
+                finish();
+            }
             }
         });
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        finish();
-//    }
+    private void populateComicDetailsUI(Comic comic) {
+        TextView title = findViewById(R.id.activity_comic_details_title);
+        TextView publishedDate = findViewById(R.id.activity_comic_details_published);
+        TextView price = findViewById(R.id.activity_comic_details_price);
+        TextView writers = findViewById(R.id.activity_comic_details_writers);
+        TextView pencilers = findViewById(R.id.activity_comic_details_pencilers);
+        TextView coverArtists = findViewById(R.id.activity_comic_details_cover_artists);
+        TextView description = findViewById(R.id.activity_comic_details_description);
+
+        title.setText(comic.getTitle());
+        publishedDate.setText(comic.getPublishedDate());
+        price.setText(comic.getPrice());
+        writers.setText(comic.getWriters());
+        pencilers.setText(comic.getPencilers());
+        coverArtists.setText(comic.getCoverArtists());
+        description.setText(comic.getDescription());
+    }
 
     /**
      * This method increments the quantity on the screen.
      */
-    public void increment(View view) {
+    private void increment() {
         if (quantity == 20) {
             Toast.makeText(this, "You cannot add more than 20 comics in a single purchase", Toast.LENGTH_SHORT).show();
             return;
@@ -69,7 +100,7 @@ public class ComicDetailsActivity extends AppCompatActivity {
     /**
      * This method decrements the quantity on the screen.
      */
-    public void decrement(View view) {
+    private void decrement() {
         if (quantity == 0) {
             Toast.makeText(this, "You must add at least one item to the cart", Toast.LENGTH_SHORT).show();
             return;

@@ -1,6 +1,8 @@
 package br.com.phoebus.marvelstore.model;
 
-public class Comic {
+import java.io.Serializable;
+
+public class Comic implements Serializable {
 
     private String title;
 
@@ -21,11 +23,11 @@ public class Comic {
     public Comic(String title, String price) {
         this.title = title;
         this.price = Double.valueOf(price);
-        this.publishedDate = "27, December, 2019";
-        this.writers = "John";
+        this.publishedDate = "27-12-2019";
+        this.writers = "John Lennon, Ringo Star";
         this.pencilers = "Paul";
         this.coverArtists = "George";
-        this.description = "Ringo";
+        this.description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
     }
 
     // Complete Constructor
@@ -110,6 +112,6 @@ public class Comic {
 
     @Override
     public String toString() {
-        return getTitle();
+        return getTitle() + " " + getPrice();
     }
 }

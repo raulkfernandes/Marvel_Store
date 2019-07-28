@@ -21,6 +21,9 @@ import br.com.phoebus.marvelstore.dao.ComicDAO;
 import br.com.phoebus.marvelstore.model.Comic;
 
 public class ComicStoreActivity extends AppCompatActivity {
+
+    ComicDAO dao = new ComicDAO();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,32 +34,44 @@ public class ComicStoreActivity extends AppCompatActivity {
         shoppingCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ComicStoreActivity.this, ShoppingCartActivity.class);
-                startActivity(intent);
+                if(dao.getCartList() == null || dao.isCartEmpty()) {
+                    Toast.makeText(ComicStoreActivity.this, "You must add at leat one comic to your cart.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(ComicStoreActivity.this, ShoppingCartActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        final List<Comic> comicStoreList = populateComics();
+        ComicStoreAdapter mAdapter = new ComicStoreAdapter(this, comicStoreList);
+        final ListView comicListView = findViewById(R.id.activity_comic_store_list_view);
+        comicListView.setAdapter(mAdapter);
+
+        comicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
+            Comic selectedComic = comicStoreList.get(posicao);
+
+            Intent comicIntent = new Intent(ComicStoreActivity.this, ComicDetailsActivity.class);
+            comicIntent.putExtra("selectedComic", selectedComic);
+            startActivity(comicIntent);
             }
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private List<Comic> populateComics() {
+        List<Comic> comicList = new ArrayList<>();
 
-        //Simulating Marvel's API request
-        ComicDAO dao = new ComicDAO();
-        dao.addFirstItens();
-        final List<Comic> comicStoreList = dao.getCartList();
+        Comic firstComic = new Comic("X-Men", "9.99");
+        Comic secComic = new Comic("Spiderman", "19.99");
+        Comic thirdComic = new Comic("Hulk", "29.99");
 
-        ComicStoreAdapter mAdapter = new ComicStoreAdapter(this, comicStoreList);
+        comicList.add(firstComic);
+        comicList.add(secComic);
+        comicList.add(thirdComic);
 
-        final ListView comicList = findViewById(R.id.activity_comic_store_list_view);
-        comicList.setAdapter(mAdapter);
-
-        comicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
-
-                Toast.makeText(ComicStoreActivity.this, "" + comicStoreList.get(posicao), Toast.LENGTH_SHORT).show();
-            }
-        });
+        return comicList;
     }
 }
