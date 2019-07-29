@@ -115,11 +115,13 @@ public class ComicStoreActivity extends AppCompatActivity {
 
                 comicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
-                        Comic selectedComic = convertedComicList.get(posicao);
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                        Comic selectedComic = convertedComicList.get(position);
+                        dao.setStoreItemPosition(position);
 
                         Intent comicIntent = new Intent(ComicStoreActivity.this, ComicDetailsActivity.class);
                         comicIntent.putExtra("selectedComic", selectedComic);
+                        comicIntent.putExtra("position", position);
                         startActivity(comicIntent);
                     }
                 });
@@ -132,7 +134,6 @@ public class ComicStoreActivity extends AppCompatActivity {
                 Log.d(TAG, "onFailure: Something went wrong: " + t.getMessage());
 
                 List<Comic> comicStoreList = populateComicsLocally();
-
                 final List<Comic> finalComicStoreList = comicStoreList;
 
                 final ComicStoreAdapter mAdapter = new ComicStoreAdapter(ComicStoreActivity.this, comicStoreList);
@@ -142,11 +143,13 @@ public class ComicStoreActivity extends AppCompatActivity {
 
                 comicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
-                        Comic selectedComic = finalComicStoreList.get(posicao);
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                        Comic selectedComic = finalComicStoreList.get(position);
+                        dao.setStoreItemPosition(position);
 
                         Intent comicIntent = new Intent(ComicStoreActivity.this, ComicDetailsActivity.class);
                         comicIntent.putExtra("selectedComic", selectedComic);
+                        comicIntent.putExtra("position", position);
                         startActivity(comicIntent);
                     }
                 });
@@ -157,19 +160,126 @@ public class ComicStoreActivity extends AppCompatActivity {
     private List<Comic> populateComicsLocally() { //TODO Criar lista completa
         List<Comic> comicList = new ArrayList<>();
 
-        Comic firstComic = new Comic();
-        firstComic.setTitle("Hulk");
-        firstComic.setPrice(10);
-        Comic secComic = new Comic();
-        secComic.setTitle("Spiderman");
-        secComic.setPrice(20);
-        Comic thirdComic = new Comic();
-        thirdComic.setTitle("X-Men");
-        thirdComic.setPrice(30);
+        Comic comic1 = new Comic();
 
-        comicList.add(firstComic);
-        comicList.add(secComic);
-        comicList.add(thirdComic);
+        comic1.setTitle("Hulk");
+        comic1.setPublishedDate("15/03/1991");
+        comic1.setPrice(10);
+        comic1.setWriters("John Lennon");
+        comic1.setPencilers("Paul MacCartney");
+        comic1.setCoverArtists("George Harris");
+        comic1.setDescription("Ringo Star");
+        comic1.setRare(false);
+
+        Comic comic2 = new Comic();
+
+        comic2.setTitle("Blackwidow");
+        comic2.setPublishedDate("15/03/1991");
+        comic2.setPrice(20);
+        comic2.setWriters("John Lennon");
+        comic2.setPencilers("Paul MacCartney");
+        comic2.setCoverArtists("George Harris");
+        comic2.setDescription("Ringo Star");
+        comic2.setRare(false);
+
+        Comic comic3 = new Comic();
+
+        comic3.setTitle("Daredevil");
+        comic3.setPublishedDate("15/03/1991");
+        comic3.setPrice(30);
+        comic3.setWriters("John Lennon");
+        comic3.setPencilers("Paul MacCartney");
+        comic3.setCoverArtists("George Harris");
+        comic3.setDescription("Ringo Star");
+        comic3.setRare(false);
+
+        Comic comic4 = new Comic();
+
+        comic4.setTitle("Ant-man");
+        comic4.setPublishedDate("15/03/1991");
+        comic4.setPrice(40);
+        comic4.setWriters("John Lennon");
+        comic4.setPencilers("Paul MacCartney");
+        comic4.setCoverArtists("George Harris");
+        comic4.setDescription("Ringo Star");
+        comic4.setRare(false);
+
+        Comic comic5 = new Comic();
+
+        comic5.setTitle("Avengers");
+        comic5.setPublishedDate("15/03/1991");
+        comic5.setPrice(50);
+        comic5.setWriters("John Lennon");
+        comic5.setPencilers("Paul MacCartney");
+        comic5.setCoverArtists("George Harris");
+        comic5.setDescription("Ringo Star");
+        comic5.setRare(false);
+
+        Comic comic6 = new Comic();
+
+        comic6.setTitle("Thor");
+        comic6.setPublishedDate("15/03/1991");
+        comic6.setPrice(10);
+        comic6.setWriters("John Lennon");
+        comic6.setPencilers("Paul MacCartney");
+        comic6.setCoverArtists("George Harris");
+        comic6.setDescription("Ringo Star");
+        comic6.setRare(false);
+
+        Comic comic7 = new Comic();
+
+        comic7.setTitle("Dr. Strange");
+        comic7.setPublishedDate("15/03/1991");
+        comic7.setPrice(20);
+        comic7.setWriters("John Lennon");
+        comic7.setPencilers("Paul MacCartney");
+        comic7.setCoverArtists("George Harris");
+        comic7.setDescription("Ringo Star");
+        comic7.setRare(false);
+
+        Comic comic8 = new Comic();
+
+        comic8.setTitle("Captain Marvel");
+        comic8.setPublishedDate("15/03/1991");
+        comic8.setPrice(30);
+        comic8.setWriters("John Lennon");
+        comic8.setPencilers("Paul MacCartney");
+        comic8.setCoverArtists("George Harris");
+        comic8.setDescription("Ringo Star");
+        comic8.setRare(false);
+
+        Comic comic9 = new Comic();
+
+        comic9.setTitle("Ironman");
+        comic9.setPublishedDate("15/03/1991");
+        comic9.setPrice(40);
+        comic9.setWriters("John Lennon");
+        comic9.setPencilers("Paul MacCartney");
+        comic9.setCoverArtists("George Harris");
+        comic9.setDescription("Ringo Star");
+        comic9.setRare(false);
+
+        Comic comic10 = new Comic();
+
+        comic10.setTitle("Spiderman");
+        comic10.setPublishedDate("15/03/1991");
+        comic10.setPrice(50);
+        comic10.setWriters("John Lennon");
+        comic10.setPencilers("Paul MacCartney");
+        comic10.setCoverArtists("George Harris");
+        comic10.setDescription("Ringo Star");
+        comic10.setRare(false);
+
+        comicList.add(comic1);
+        comicList.add(comic2);
+        comicList.add(comic3);
+        comicList.add(comic4);
+        comicList.add(comic5);
+        comicList.add(comic6);
+        comicList.add(comic7);
+        comicList.add(comic8);
+        comicList.add(comic9);
+        comicList.add(comic10);
 
         return comicList;
     }

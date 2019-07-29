@@ -1,7 +1,5 @@
 package br.com.phoebus.marvelstore.dao;
 
-import android.util.Log;
-
 import java.util.List;
 
 import br.com.phoebus.marvelstore.model.Comic;
@@ -13,6 +11,15 @@ public class ComicDAO {
     public static boolean hasRareDiscountCoupon = false;
     public static float commonDiscount = 0.1f;
     public static float rareDiscount = 0.25f;
+    private int storeItemPosition = 0;
+
+    public int getStoreItemPosition() {
+        return storeItemPosition;
+    }
+
+    public void setStoreItemPosition(int storeItemPosition) {
+        this.storeItemPosition = storeItemPosition;
+    }
 
     public boolean isCartEmpty() {
         return ShoppingCartSingleton.getInstance().isComicListEmpty();
@@ -34,6 +41,7 @@ public class ComicDAO {
         ShoppingCartSingleton.getInstance().clearComicList();
     }
 
+    // Checking discount Coupon
     public String getTotalPrice() {
         double totalPrice = 0;
         List<Comic> comicList = getCartList();

@@ -112,11 +112,6 @@ public class ComicJSON {
         this.publishedDate = publishedDate;
     }
 
-    /**
-     *  Adds an author name to this comic writers formatted names field
-     *
-     * @param authorName - The author name.
-     */
     public void addWriter(String authorName) {
         if (authorName != null) {
             if (writers == null || writers.isEmpty()) {
@@ -127,11 +122,6 @@ public class ComicJSON {
         }
     }
 
-    /**
-     * Adds an author name to this comic pencillers formatted names field
-     *
-     * @param authorName - The author name.
-     */
     public void addPenciler(String authorName) {
         if (authorName != null) {
             if (pencilers == null || pencilers.isEmpty()) {
@@ -142,11 +132,6 @@ public class ComicJSON {
         }
     }
 
-    /**
-     * Adds an author name to this comic cover artist formatted names field
-     *
-     * @param authorName - The author name.
-     */
     public void addCoverArtist(String authorName) {
         if (authorName != null) {
             if (coverArtits == null || coverArtits.isEmpty()) {

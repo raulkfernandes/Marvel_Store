@@ -31,7 +31,16 @@ public class ShoppingCartActivity extends AppCompatActivity {
         setTitle("Shopping Cart");
         setContentView(R.layout.activity_shopping_cart);
 
-        // Set total price
+        final TextView totalPrice = totalPriceBehaviour();
+
+        applyDiscountBehaviour(totalPrice);
+
+        checkoutButtonBehaviour();
+
+        continueShoppingButtonBehaviour();
+    }
+
+    private TextView totalPriceBehaviour() {
         final TextView totalPrice = findViewById(R.id.activity_shopping_cart_total_price_text_view);
         final double doublePrice = Double.valueOf(dao.getTotalPrice());
         totalPrice.setText(df.format(doublePrice));
@@ -39,8 +48,10 @@ public class ShoppingCartActivity extends AppCompatActivity {
         ShoppingCartAdapter mAdapter = new ShoppingCartAdapter(this, dao);
         ListView shoppingCartListView = findViewById(R.id.activity_shopping_cart_list_view);
         shoppingCartListView.setAdapter(mAdapter);
+        return totalPrice;
+    }
 
-        // Apply discount
+    private void applyDiscountBehaviour(final TextView totalPrice) {
         final EditText discountCouponEditText = findViewById(R.id.activity_shopping_cart_discount_coupon_edit_text);
 
         if(dao.hasDiscountCouponApplied()) {
@@ -78,8 +89,19 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-        // Checkout Button
+    private void continueShoppingButtonBehaviour() {
+        Button continueShoppingButton = findViewById(R.id.activity_shopping_cart_continue_shopping_button);
+        continueShoppingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    private void checkoutButtonBehaviour() {
         Button checkoutButton = findViewById(R.id.activity_shopping_cart_checkout_button);
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,15 +116,6 @@ public class ShoppingCartActivity extends AppCompatActivity {
                     dao.clearCarList();
                     finish();
                 }
-            }
-        });
-
-        // Continue Shopping Button
-        Button continueShoppingButton = findViewById(R.id.activity_shopping_cart_continue_shopping_button);
-        continueShoppingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
             }
         });
     }

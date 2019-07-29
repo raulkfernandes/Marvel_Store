@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/shopping_cart_list_item_image"
         android:background="@color/cardview_dark_background"
-        android:layout_width="75dp"
+        android:layout_width="50dp"
         android:layout_height="75dp" />
 
     <LinearLayout
@@ -19,17 +19,17 @@
         <TextView
             android:id="@+id/shopping_cart_list_item_title"
             android:text="X-men"
-            android:textSize="20sp"
-            android:layout_margin="8dp"
+            android:textSize="15sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/shopping_cart_list_item_price"
-            android:text="$ 9.99"
+            android:text="$9.99"
             android:textSize="10sp"
-            android:layout_margin="8dp"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"/>

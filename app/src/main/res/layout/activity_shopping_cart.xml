@@ -64,12 +64,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Checkout"
-        android:layout_margin="8dp" />
+        android:layout_margin="5dp" />
 
     <Button android:id="@+id/activity_shopping_cart_continue_shopping_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Continue Shopping"
-        android:layout_margin="8dp" />
+        android:layout_margin="5dp" />
 
 </LinearLayout>
