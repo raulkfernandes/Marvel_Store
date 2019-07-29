@@ -29,7 +29,7 @@ public class ComicJSON {
     @Expose
     private ArrayList<Date> dates;
 
-    // Comic fields
+    // Comic Fields
 
     private String publishedDate;
 
@@ -43,7 +43,7 @@ public class ComicJSON {
 
     private double price;
 
-    // getters
+    // Getters
 
     public String getTitle() {
         return title;
@@ -98,7 +98,7 @@ public class ComicJSON {
         return "No cover artists available";
     }
 
-    // setters
+    // Setters
 
     public void setRare(Boolean rare) {
         this.isRare = rare;

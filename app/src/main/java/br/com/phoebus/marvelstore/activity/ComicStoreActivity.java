@@ -47,73 +47,13 @@ public class ComicStoreActivity extends AppCompatActivity {
         setTitle("Comics Store");
         setContentView(R.layout.activity_comic_store);
 
-        FloatingActionButton shoppingCartButton = findViewById(R.id.activity_comic_store_fab_shopping_cart);
-        shoppingCartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(dao.getCartList() == null || dao.isCartEmpty()) {
-                    Toast.makeText(ComicStoreActivity.this, "Your cart is empty.", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Intent intent = new Intent(ComicStoreActivity.this, ShoppingCartActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
+        populateComicStoreList();
 
-        boolean local = true;
-
-        if (local) {
-            List<Comic> comicStoreList = populateComicsLocally();
-
-            if(comicStoreList == null || comicStoreList.isEmpty()) {
-                comicStoreList = populateComicsLocally();
-            }
-            final List<Comic> finalComicStoreList = comicStoreList;
-
-            final ComicStoreAdapter mAdapter = new ComicStoreAdapter(this, comicStoreList);
-            final ListView comicListView = findViewById(R.id.activity_comic_store_list_view);
-            comicListView.setAdapter(mAdapter);
-
-
-            comicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
-                    Comic selectedComic = finalComicStoreList.get(posicao);
-
-                    Intent comicIntent = new Intent(ComicStoreActivity.this, ComicDetailsActivity.class);
-                    comicIntent.putExtra("selectedComic", selectedComic);
-                    startActivity(comicIntent);
-                }
-            });
-        }
-        else {
-            populateComicsWebService();
-        }
-
+        shoppingCartFabBehaviour();
     }
 
-    private List<Comic> populateComicsLocally() { //TODO Criar lista completa
-        List<Comic> comicList = new ArrayList<>();
+    private void populateComicStoreList() {
 
-        Comic firstComic = new Comic();
-        firstComic.setTitle("Hulk");
-        firstComic.setPrice(10);
-        Comic secComic = new Comic();
-        secComic.setTitle("Spiderman");
-        secComic.setPrice(20);
-        Comic thirdComic = new Comic();
-        thirdComic.setTitle("X-Men");
-        thirdComic.setPrice(30);
-
-        comicList.add(firstComic);
-        comicList.add(secComic);
-        comicList.add(thirdComic);
-
-        return comicList;
-    }
-
-    private void populateComicsWebService() {
         // Retrofit Instance
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -130,7 +70,7 @@ public class ComicStoreActivity extends AppCompatActivity {
             public void onResponse(Call<DataJSON> call, Response<DataJSON> response) {
                 Log.d(TAG, "onResponse: Received Information: " + response.body().toString());
 
-                List<ComicJSON> comicListJSON = response.body().getData().getComicsJSON();
+                final List<ComicJSON> comicListJSON = response.body().getData().getComicsJSON();
 
                 List<ComicJSON> comicList = new ArrayList<>();
                 for (int i = 0; i < comicListJSON.size(); i++) {
@@ -168,6 +108,7 @@ public class ComicStoreActivity extends AppCompatActivity {
                 }
 
                 final List<Comic> convertedComicList = convertJSONtoComic(comicList);
+
                 final ComicStoreAdapter mAdapter = new ComicStoreAdapter(ComicStoreActivity.this, convertedComicList);
                 final ListView comicListView = findViewById(R.id.activity_comic_store_list_view);
                 comicListView.setAdapter(mAdapter);
@@ -184,12 +125,53 @@ public class ComicStoreActivity extends AppCompatActivity {
                 });
             }
 
+            // If something went wrong in request, initialize a local List
             @Override
             public void onFailure(Call<DataJSON> call, Throwable t) {
-                Toast.makeText(ComicStoreActivity.this, "Something went wrong.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ComicStoreActivity.this, "Comic Store List initialized locally.", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onFailure: Something went wrong: " + t.getMessage());
+
+                List<Comic> comicStoreList = populateComicsLocally();
+
+                final List<Comic> finalComicStoreList = comicStoreList;
+
+                final ComicStoreAdapter mAdapter = new ComicStoreAdapter(ComicStoreActivity.this, comicStoreList);
+                final ListView comicListView = findViewById(R.id.activity_comic_store_list_view);
+                comicListView.setAdapter(mAdapter);
+
+
+                comicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
+                        Comic selectedComic = finalComicStoreList.get(posicao);
+
+                        Intent comicIntent = new Intent(ComicStoreActivity.this, ComicDetailsActivity.class);
+                        comicIntent.putExtra("selectedComic", selectedComic);
+                        startActivity(comicIntent);
+                    }
+                });
             }
         });
+    }
+
+    private List<Comic> populateComicsLocally() { //TODO Criar lista completa
+        List<Comic> comicList = new ArrayList<>();
+
+        Comic firstComic = new Comic();
+        firstComic.setTitle("Hulk");
+        firstComic.setPrice(10);
+        Comic secComic = new Comic();
+        secComic.setTitle("Spiderman");
+        secComic.setPrice(20);
+        Comic thirdComic = new Comic();
+        thirdComic.setTitle("X-Men");
+        thirdComic.setPrice(30);
+
+        comicList.add(firstComic);
+        comicList.add(secComic);
+        comicList.add(thirdComic);
+
+        return comicList;
     }
 
     private List<Comic> convertJSONtoComic(List<ComicJSON> comicJSONList) {
@@ -214,6 +196,22 @@ public class ComicStoreActivity extends AppCompatActivity {
         setRareComics(convertedComicList);
 
         return convertedComicList;
+    }
+
+    private void shoppingCartFabBehaviour() {
+        FloatingActionButton shoppingCartButton = findViewById(R.id.activity_comic_store_fab_shopping_cart);
+        shoppingCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dao.getCartList() == null || dao.isCartEmpty()) {
+                    Toast.makeText(ComicStoreActivity.this, "Your cart is empty.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(ComicStoreActivity.this, ShoppingCartActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void setRareComics(List<Comic> convertedComicList) {
